@@ -1,9 +1,15 @@
-import { Outlet } from "react-router-dom";
+import styled from 'styled-components';
 
-export const Sidebar = () => {
+export const Sidebar = ({isOPen, setIsOpen}) => {
   return (
-    <div>Sidebar
-      <Outlet/>
-    </div>
+    <Container>
+      <div className="logoContent">
+        Sidebar
+      </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  background: ${({theme}) => theme.bg};
+`;

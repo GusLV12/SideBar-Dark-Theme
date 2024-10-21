@@ -2,12 +2,13 @@ import { createContext, useState } from 'react';
 import {RoutersApp} from './routers/Routers';
 import styled, {ThemeProvider} from 'styled-components';
 import {Light, Dark} from './styles/Them';
+import { Sidebar } from './components/Sidebar';
 
 export const themeLayout = createContext(null);
 
 export const App = () => {
   const [theme, setTheme] = useState('light');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const themeStyle = theme === 'light' ? Light : Dark;
 
   const changeTheme = () => {
@@ -17,10 +18,9 @@ export const App = () => {
   return (
     <themeLayout.Provider value={{theme, setTheme}}>
       <ThemeProvider theme={themeStyle}>
-    <Container>
-      <main className={isOpen ? "sidebarState active" : "sidebarState"}>
-      <RoutersApp />
-      </main>
+    <Container className={isOpen ? "active" : null}>
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <RoutersApp />
     </Container>
     </ThemeProvider>
     </themeLayout.Provider>
@@ -28,14 +28,12 @@ export const App = () => {
 };
 
 const Container = styled.div`
-  .sidebarState{
-  display: flex;
+  display: grid;
   grid-template-columns: 90px auto;
   background: ${({theme}) => theme.bgtotal};
 
   &.active {
     grid-template-columns: 300px auto; 
-  }
   }
 
 `;
