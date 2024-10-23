@@ -35,6 +35,7 @@ export default [
       ],
       semi: ["warn", "always"],
       "no-unused-vars": ["warn"],
+      "react/prop-types": "off",
     },
   },
 ];
